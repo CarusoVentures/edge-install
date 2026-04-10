@@ -1,0 +1,42 @@
+Built AI infrastructure for a venture firm while planning personalized bots for teammates.
+============================================================================================
+Date: March 23, 2026
+
+
+OVERVIEW
+--------
+Ryan spent his first day at Crusoe Ventures in Boulder establishing AI agent infrastructure for the VC firm. The day centered on building "Edge"—Dan Caruso's personal AI executive assistant—through extensive technical setup with Connor (an analyst) and strategic discussions with Joe (VP) about broader automation opportunities including Sundance Film Festival operations.
+
+Ryan configured four Mac Minis with pooled 88GB RAM, established OpenClaw environments, and integrated multiple APIs (Claude, ChatGPT, Notion, Telegram, GitHub, Railway, Cloudflare) with careful attention to security protocols and OAuth authentication. He emphasized creating repeatable, documented systems that the team could maintain independently, framing AI as augmentation rather than replacement for human work.
+
+He also connected with Joe about potential AI applications for Sundance and discussed ecosystem automation strategies for Colorado startups with Cody.
+
+The day concluded with Ryan feeling energized by the team's "rip it and grip it" mentality and the firm's willingness to invest in cutting-edge infrastructure, while remaining grounded in delivering practical, documented value.
+
+
+ATMOSPHERE
+----------
+Energetic, technically ambitious, and genuinely collaborative. The Crusoe Ventures team displayed enthusiasm for AI adoption mixed with practical concerns about job automation and security—creating space for Ryan to evangelize while reassuring colleagues. Ryan's own mood shifted from focused technical intensity to genuine excitement about the project's potential, particularly when discussing local model clusters and "explainer websites" as communication tools.
+
+
+INBOX HIGHLIGHTS
+----------------
+Connor from Crusoe Ventures shared the formal scope document for Ryan's AI consulting engagement, outlining priorities: first optimizing Dan's "Edge" agent with full documentation, then rolling out optimized setups to Cody, Gib, and Connor, with longer-term goals including investment inbox automation and portfolio monitoring. Connor also shared login credentials for Edge's systems and scheduled a brief check-in with Emily for Tuesday morning.
+
+
+CALENDAR HIGHLIGHTS
+-------------------
+Ryan's calendar centered on a pivotal technical collaboration with Connor at Crusoe Ventures' Pearl Street office, where they spent 45 minutes configuring the four Mac Minis that would form the backbone of "Edge"—Dan Caruso's AI executive assistant. This hands-on session with Connor represented more than infrastructure setup; it was Ryan's opportunity to model his "teach while building" philosophy, helping the analyst navigate terminal environments and OpenClaw configurations while establishing the trust that would let the team maintain these systems independently. The timing (12:15 PM) suggests this working lunch bridged Ryan's morning planning and afternoon execution, capturing the day's energetic blend of deep technical work and genuine collaboration that left him feeling the team had truly embraced a "rip it and grip it" mentality toward AI adoption.
+
+
+KEY TAKEAWAYS
+-------------
+- Technical Foundation Established: Four Mac Minis configured with OpenClaw, Claude 4.6 (1M context window), and ChatGPT via OAuth—prioritizing "smartest models first" to minimize errors during setup
+
+- Edge Bot Architecture: Designed as Dan's executive assistant with human-in-the-loop approval, integrating email forwarding, calendar access, Notion dashboards, and Telegram as primary interface
+
+- Security-First Approach: Scoped API keys, nightly "Security Council" agents for drift detection, BitDefender VPN compliance, and documented audit trails for all configurations
+
+- Documentation as Deliverable: Ryan's insistence on "explainer websites" and repeatable setup processes reflects his VC background—building platforms others can replicate for portfolio companies
+
+- Expansion Opportunities: Joe's immediate interest in Sundance automation and Cody's ecosystem vision suggest Ryan's two-week contract could extend significantly if early wins land

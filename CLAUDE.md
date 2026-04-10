@@ -82,6 +82,7 @@ People profiles: `people/`
 ## Architecture Decisions (Confirmed)
 
 - **oMLX** over Ollama (2x faster, 50% less RAM on Apple Silicon)
+- **oMLX is the ONLY embedding provider** — OpenClaw memory search uses the "openai" protocol adapter with `remote.baseUrl: http://localhost:8000/v1` pointing at oMLX. Custom scripts also call oMLX directly. Ollama is NOT installed. See lessons-learned.md #15-17 for the full story.
 - **mxbai-embed-large** for local embeddings (NOT Gemini for confidential data)
 - **Lossless Claw** for context management
 - **Qwen 3 8B** for local chat/heartbeats via oMLX

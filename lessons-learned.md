@@ -194,3 +194,47 @@ Scripts run via launchd don't inherit the user's `.zshrc` environment. API keys 
 Edge must ALWAYS have `requireMentions=false` in all Telegram groups. This gets reset on config changes and reboots. Verify after every deployment step that touches Telegram or OpenClaw config.
 
 Check: look for `requireMentions` in `~/.openclaw/openclaw.json` under the Telegram channel config.
+
+## 15. OpenClaw Embedding Provider: Use "openai" Adapter, NOT "ollama"
+
+**What happens:** OpenClaw's "ollama" embedding adapter speaks Ollama's native API format (`/api/embeddings`), which oMLX does not serve. oMLX only speaks the OpenAI format (`/v1/embeddings`). Setting `provider: "ollama"` fails with "fetch failed" because oMLX returns 404 on `/api/embeddings`.
+
+**What also doesn't work:**
+- Setting `OPENAI_BASE_URL` as an env var — OpenClaw's embedding adapter ignores this entirely. It only reads `remote.baseUrl` from the JSON config.
+- Adding `baseUrl` to the top-level memorySearch config — schema validation rejects it as an unknown key.
+
+**How to fix:** Use `provider: "openai"` with `remote.baseUrl` and `remote.apiKey` inside the memorySearch config:
+```json
+"memorySearch": {
+  "provider": "openai",
+  "model": "mxbai-embed-large",
+  "remote": {
+    "baseUrl": "http://localhost:8000/v1",
+    "apiKey": "dummy"
+  },
+  "chunking": { "tokens": 128, "overlap": 24 }
+}
+```
+
+The "openai" here is just the API protocol — it connects to oMLX on localhost, NOT to api.openai.com. The `apiKey` is ignored by oMLX but required by the adapter.
+
+**Also:** oMLX must have `skip_api_key_verification: true` in `~/.omlx/settings.json`, otherwise it rejects the dummy key with HTTP 401.
+
+**Also:** mxbai-embed-large has a 512-token context. OpenClaw's default chunking (400 tokens × 4 = 1600 bytes) exceeds this. Set `chunking.tokens: 128` to keep chunks within limits.
+
+## 16. oMLX Homebrew Tap Requires Full URL
+
+**What happens:** `brew tap jundot/omlx` fails because Homebrew can't infer the repo URL.
+
+**How to fix:** Use the full URL: `brew tap jundot/omlx https://github.com/jundot/omlx`
+
+## 17. oMLX CLI Doesn't Match Deploy Script
+
+**What happens:** The deploy skill references `omlx pull`, `omlx list`, `omlx --version` — none of these exist. oMLX v0.3.0 only has `omlx serve` and `omlx launch`.
+
+**How to fix:** Download models using the HuggingFace CLI bundled with oMLX:
+```bash
+/opt/homebrew/opt/omlx/libexec/bin/hf download mlx-community/Qwen3-8B-4bit --local-dir ~/.omlx/models/qwen3-8b
+/opt/homebrew/opt/omlx/libexec/bin/hf download mixedbread-ai/mxbai-embed-large-v1 --local-dir ~/.omlx/models/mxbai-embed-large
+```
+oMLX auto-discovers models from subdirectories of `~/.omlx/models/`.

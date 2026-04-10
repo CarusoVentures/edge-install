@@ -1,0 +1,39 @@
+Deployed Edge—an AI Chief of Staff with 23 skills—while presenting to Dan and planning team expansion.
+=======================================================================================================
+Date: March 31, 2026
+
+
+OVERVIEW
+--------
+Ryan spent a busy day at Crusoe Ventures providing hands-on AI consulting and technical support. He helped Dan troubleshoot Claude Desktop integration with Microsoft Word, walking through advanced settings including auto-permissions, bypass mode, and persist preview sessions. With Connor, he resolved API key management issues and emphasized using OAuth tokens over API keys to avoid hitting rate limits—particularly relevant given an Anthropic bug that caused 20x token usage. Ryan also introduced his custom "skill book" system for building AI agents and discussed his vision for an "agentic office" with visual dashboards showing AI agents performing tasks.
+
+The day's centerpiece was Ryan's presentation of "Edge"—a comprehensive AI executive assistant (promoted to "Chief of Staff") he built for Dan Caruso with 23+ specialized skills including email analysis, meeting prep, investment pipeline tracking, and overnight "pre-cognition" research. He detailed the extensive security architecture: file vault encryption, API rotation, approval gates, content sanitization, audit logging, and nightly "security council" agents. Dan was visibly impressed, calling it "the biggest leap humankind has made" and offering to fund Ryan's future AI agent business.
+
+The team also discussed logistics for an upcoming Music Fest event, including booking the Steel Drivers band (~$27-29K performance fee) and resolving sponsor portal access issues. Ryan coordinated schedules for Thursday follow-ups, including a house visit to complete Dan's Microsoft Word plugin setup and optimize his local Claude environment.
+
+
+ATMOSPHERE
+----------
+Fast-paced, technically intense, and collaborative with an undercurrent of genuine excitement about AI's transformative potential. Ryan maintained energetic, problem-solving energy while juggling multiple support requests. The office culture included casual banter about food (pastel de nata/egg tarts, Tovala meals, Tabala), parking logistics, and the shared experience of "token withdrawals" when AI services hit limits. There was palpable enthusiasm when Dan saw Edge demonstrated, with Ryan's passion for agentic systems clearly resonating.
+
+
+CALENDAR HIGHLIGHTS
+-------------------
+Ryan's afternoon centered on two back-to-back sessions with Dan Caruso that proved pivotal for his AI work at Crusoe Ventures. The first was a possible video call at 2:00 PM, followed immediately by a dedicated 30-minute OpenClaw meeting—this was where Ryan unveiled "Edge," the comprehensive AI executive assistant he'd built with 23+ specialized skills. The timing of these consecutive meetings suggests the initial call may have flowed directly into the deeper technical demonstration, culminating in Dan's enthusiastic response and offer to fund Ryan's future AI agent business.
+
+
+KEY TAKEAWAYS
+-------------
+- Edge AI deployment is live with 23+ custom skills for Crusoe Ventures, including portfolio management, meeting prep, investment analysis, and overnight predictive research with "pre-cognition" caching for instant daytime responses
+
+- Security architecture is extensive: file encryption, scoped/restricted APIs with 6-12 month rotation, human approval gates, content sanitization against prompt/SQL injection, full audit logging, and nightly "security council" agents (red team, compliance, privacy, audit) that auto-harden the system
+
+- Learning system: Edge observes Dan and Emily's approvals to build confidence scoring; once 98% accuracy is reached, actions become automated with human-in-the-loop for final approval
+
+- Token Management Crisis: Multiple team members hitting Claude rate limits due to a recent Anthropic bug causing 20x token usage; Ryan emphasized using OAuth over API keys and setting up dedicated accounts to distribute load
+
+- Team Expansion: New AI specialist starting Monday who will need onboarding; Ryan building visual "agentic office" dashboard for monitoring AI team performance
+
+- Voice cloning planned: Ryan needs to extract audio from Dan's podcast "The Bear" to train 11 Labs voice synthesis for automated email drafting in Dan's voice
+
+- Code automation vision: Nightly bots to clean spaghetti code, enforce 200-300 line file limits, create reusable components, and maintain context maps so AI agents can target specific files without reading entire codebases

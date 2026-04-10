@@ -1,0 +1,1001 @@
+AI assistant deployment planning
+================================
+Date: March 30, 2026
+Time: 11:32 AM – 12:27 PM MDT
+
+
+OVERVIEW
+--------
+Met with Emily, Dan Caruso's executive assistant, at a coffee shop near the office to gather detailed requirements for building AI automation systems for Dan's calendar, scheduling, and operations. This was a working session to understand pain points and priorities before deploying the "Nightman" overnight AI processing system and Telegram-based bot for approvals. Emily shared extensive context about current workflows, frustrations with existing AI tools (Claude/ChatGPT), and opportunities spanning professional and personal domains—from contact enrichment and intelligent scheduling to house reservations and golf tournament management.
+
+
+ATMOSPHERE
+----------
+Collaborative and energized; Emily was genuinely excited about the potential ("I'm so excited about it," "It's going to completely change the way we do everything"). Professional but warm rapport-building conversation with mutual openness about past experiences and future possibilities. Ryan's consultative, "measure twice, cut once" approach balanced with rapid deployment timeline.
+
+
+KEY TAKEAWAYS
+-------------
+  - Immediate technical priorities identified:
+  - Contact/person directory auto-enrichment with tags (investor/tech entrepreneur/interests like Sundance/music/politics)
+  - Intelligent scheduling that understands meeting hierarchy (internal meetings can be moved, external cannot) with automatic travel time blocks using live traffic data
+  - Email drafting with proper formatting, hyperlinks, preferred email selection, and EA CC rules
+  - Nightly calendar event enrichment and quality checks (Google Meet links, travel time, parking info)
+
+  - Strategic "Nightman" overnight processing concept well-received: Automated research, LinkedIn enrichment, project advancement, and proactive recommendations while Dan sleeps (leveraging cheaper API tokens at night)
+
+  - Data architecture tension surfaced: Dan shifting from Notion to web portals for some workflows (Boulder Roots Music Fest sponsor portal); need to ensure AI system flexibility
+
+  - Personal/family automation opportunities: House reservation management (Beaver Creek, Cabo), golf tournament registration and partner matching, family-office integration events, Caruso Foundation grant tracking, estate planning board decks
+
+  - Human-in-the-loop approval process confirmed: Emily and Dan will review AI-generated outputs via Telegram before sending; goal is "10x more" productivity, not replacement
+
+  - Ryan's deployment approach: Front-loading work this week, aiming for ~1 month full deployment with ongoing refinement
+
+
+ACTION ITEMS
+------------
+  → [ ] Set up Emily on Telegram for bot interaction and approvals
+  → [ ] Deploy meeting prep capabilities with Notion database enrichment and transcript integration
+  → [ ] Build contact directory auto-tagging system (replace manual LinkedIn research)
+  → [ ] Create intelligent scheduling system with moveable vs. fixed meeting classification
+  → [ ] Implement nightly "Nightman" enrichment runs for calendar and contacts
+  → [ ] Design concise, action-oriented reporting format for Dan (noise reduction priority)
+  → [ ] Add travel booking integration with NetJets hours tracking and fallback to James Lovett/Fly1200
+  → [ ] Document stretch goals: house reservation system, golf tournament automation, foundation grant tracking, quarterly board deck generation
+  → [ ] Schedule follow-up with Dan to confirm priorities and reporting preferences
+  → [ ] Move car within 15 minutes (parking meter) — completed during meeting
+  → [ ] Adjust schedule: VP session moved to tomorrow; plan to work late tonight and be available for dinner
+
+
+TRANSCRIPT
+----------
+Unknown: Alright.Ready?
+
+Unknown: Can we go to Ozo or do you have another place in mind?
+
+RYAN: Creature comforts or whatever.
+
+Unknown: Yeah, sorry.
+
+Unknown: I felt like last week, I missed our first meeting.
+
+Unknown: Oh, no worries.
+
+RYAN: Yeah, no, when we were doing another meeting, Dan called me in to talk.
+
+RYAN: He's like, fix this thing.
+
+Unknown: And I was like, okay.
+
+RYAN: I mean, this is my entire life, too. Yeah.
+
+Unknown: I'm so excited about it.
+
+Unknown: Yeah.Helping people get
+
+RYAN: In startups and investing.
+
+RYAN: Yeah.So, I was a startup, my VC asked me to join.
+
+RYAN: Oh, they're closed.
+
+RYAN: And so, it's like there's a few paths into VC.
+
+RYAN: You know, one's the analyst path. Yeah.
+
+RYAN: One's the I Have Money path.
+
+RYAN: So my startup died, but they were like, hey, join us.
+
+RYAN: And you've been helping out a lot, so we want you to join.
+
+RYAN: And then I did that for a long time building out accelerators and doing early stage investments in China and then Taiwan.
+
+RYAN: That one, Foursquare, in China before Foursquare existed.
+
+RYAN: And it was before any of that happened in China.
+
+RYAN: Which today is the biggest one, Dienping.
+
+Unknown: And China is pretty like, they have all their own apps for everything.
+
+RYAN: Yeah, everything, 100%.
+
+RYAN: Yeah.They have their own ecosystem, but it's, in my opinion, far better.
+
+RYAN: Yeah.Yeah. Far, far better.
+
+Unknown: Yep.Okay, and where do you live?
+
+RYAN: I live in Denver near the museum in City Park.
+
+Unknown: Awesome.Deleted the app.
+
+RYAN: For right now, I just do black coffee.
+
+RYAN: It's for the house port. Easy. Yeah. Yeah, I have always been very sensitive to caffeine.
+
+Unknown: Yeah.So I just don't like the feeling, but I'll do it when I'm like really desperate.
+
+Unknown: Yeah, it makes sense.
+
+RYAN: I do caffeine breaks.
+
+RYAN: The first week's hard, and then it feels great after.
+
+RYAN: So like two months?
+
+Unknown: Yeah.Yes, that's a long time. Yeah.
+
+Unknown: Then when you go back to it, do you have less of a resistance?
+
+Unknown: Oh yeah, it's like crazy.
+
+Unknown: Yeah, it's like odd. Yeah.
+
+RYAN: So you're 20 minutes from the beach?
+
+Unknown: It's a little too much in California.
+
+RYAN: I know.
+
+Unknown: That's too much.
+
+Unknown: It's too far.
+
+Unknown: I know.
+
+Unknown: That's a sad thing.
+
+RYAN: What is the job?
+
+Unknown: So we have a boring industry.
+
+Unknown: When we lived here, we worked for a specialized bike company.
+
+Unknown: And we initially were like, we don't want to move to California, like, you should find a new job.
+
+Unknown: And then it turned out they were like picking and choosing who they wanted to move to California and who they just wanted to lay off.
+
+Unknown: And my husband got the shit out of that.
+
+Unknown: Hi guys.
+
+Unknown: So, yeah.
+
+Unknown: Hi there.
+
+Unknown: How's it?
+
+Unknown: Can I see tea options?
+
+RYAN: Yeah.Oh, nice.
+
+RYAN: Could I get the pour the just like the house blend, please?
+
+Unknown: Or whatever you have?
+
+Unknown: Drip, coffee.
+
+Unknown: Drip, yeah, the drip.
+
+Unknown: What's nice?
+
+RYAN: Whatever this is, we could pour it in here, please.
+
+Unknown: Oh, yeah, for sure.
+
+Unknown: Awesome, thank you.
+
+Unknown: Do you have a preference of like medium, lighter roast?
+
+RYAN: Yeah.Maybe room or just a little bit of room.
+
+Unknown: Yeah, thank you.
+
+RYAN: So then you found another draw.
+
+Unknown: So then it's funny like there are so many outdoor companies here.
+
+Unknown: Like you'd think he would have been fine, but it's just a really hard time right now.
+
+Unknown: We got through a lot of like final interstates and then the other person would get the job.
+
+Unknown: So that happened like four times.
+
+Unknown: That's awesome.
+
+Unknown: So we eventually, through a friend of a friend, got connected to this person at this company in Lauren County and what kind of outdoors?
+
+Unknown: Mostly bike industry.
+
+Unknown: Right now he's working for Revelist, so they own like Campbellback and GRO and Hawks Racing.
+
+Unknown: So like, or access, I guess it's accessories.
+
+Unknown: It's like lights, bags, saddles, belts, and like all that sort of thing.
+
+Unknown: Of course.
+
+Unknown: Anything else for you?
+
+Unknown: Can I do the pepper antique?
+
+Unknown: Take it.
+
+Unknown: Okay, what size would you?
+
+Unknown: Cool, thank you for coming.
+
+Unknown: Uh just till Thursday.
+
+Unknown: Um that was kind of our deal when I moved because Fridays not many people come into office anyway.
+
+RYAN: Are you coming in?
+
+RYAN: Are you flying in every week?
+
+Unknown: No, it's once a month.
+
+Unknown: Once a month?
+
+Unknown: Yeah, so I'll be here again in like four weeks.
+
+Unknown: How long are you with us?
+
+Unknown: As long as I'm needed.
+
+Unknown: As long as it takes, yeah, okay.
+
+RYAN: I mean, I want to deploy and finish everything in a month.
+
+Unknown: Okay, so you might still be here when I come back, maybe not.
+
+RYAN: And there's really a serious need for someone to keep on updating these systems and honing them in and making sure they're doing well and updating to the newest stuff.
+
+RYAN: Like that's a that's full-time thing as well.
+
+Unknown: Yeah, and just like, I don't know, we work so quickly on that that I feel like we have a huge need for it.
+
+Unknown: Because if we're not keeping up with it, that's the point.
+
+RYAN: It's not going to keep up with D. Yeah, the point is speed.
+
+Unknown: Speed is the point.
+
+Unknown: Do you want to sit outside?
+
+RYAN: Sorry.Okay.
+
+RYAN: So, my goal of this talk is to distill and better understand how I can help you.
+
+RYAN: So in building like the components for what we're going to do, I had kind of a good idea from Dan and Connor and a few other conversations that I had about what it looks like for success.
+
+RYAN: Like today, I am launching capabilities for like meeting prep and looking at the calendar that you manage and that you do and then enriching that with data that we have in the Notion database and then making summaries of what that looks like and then having that connect to transcripts that are you know made and then that being updated so like the notion database gets updated.
+
+RYAN: And it can do things like I feel like for you you need to be really involved in the kind of development of this and the process.
+
+RYAN: I'd like you to get on Telegram if possible because that's how we talk to the bot.
+
+RYAN: And the bot's going to require approvals for certain things.
+
+RYAN: And because we're not going to do a human in the middle for everything, we're not going to trust it at all.
+
+RYAN: And we're going to say, hey, this is what we want you to approve.
+
+RYAN: And then I guess you and Dan will be approving it since you're, you know, kind of sitting on top of Dan's calendar schedule and all that kind of stuff.
+
+RYAN: But what are the main things, I guess, stepping back from that, like, I didn't say any of that.
+
+RYAN: What would be the best things to take off your plate?
+
+RYAN: What would be the best wins for Dan's calendar for schedule?
+
+RYAN: And what would be the best wins for you to keep up to pace or go ahead of Dan's?
+
+Unknown: Okay, I'm going to punt that back to you with a different question.
+
+Unknown: And it quickly seems like Dan instead now wants to be making a web page for everything.
+
+Unknown: Like, even for the Boulder Roots Music Fest stuff we're doing with the sponsor portal, he's like, nope, we're only updating this website now and we're no longer updating our Notion databases.
+
+Unknown: So that's something I'm worried about keeping up with.
+
+Unknown: And I'm also like, should we be spending all of this time updating things in Notion if that's a direction that we're going in?
+
+Unknown: Yeah, I feel you.
+
+RYAN: That's good, really good insight to have.
+
+RYAN: Yeah, if you could put on your witch hat and a wizard and a little magic eight ball and tell me the future as well, that would help as well.
+
+RYAN: Yeah, help me understand that.
+
+Unknown: It has so many fields that have just been compiled and compiled over the years.
+
+Unknown: Basically every single time every single time we plan an event, we make five new properties in this database because you need one to like, who are we inviting?
+
+Unknown: Have we invited them?
+
+Unknown: And so every time we plan an event, there's like five new properties.
+
+RYAN: Great, great, I love it.
+
+Unknown: I'm gonna help.
+
+Unknown: You can archive, I don't know what you can archive, but I want to archive it.
+
+Unknown: I don't want to completely lose it, but I also don't want it to be there anymore if it's an event we held two years ago and we don't need it anymore.
+
+Unknown: And will it be able to tag?
+
+Unknown: And then I have to tag whether they're an investor or a tech entrepreneur and tag potential interests that they might have.
+
+Unknown: Like are they interested in music or sundance or politics or whatever it is?
+
+Unknown: I have to go in and tag all of those things.
+
+Unknown: So is it going to be able to, instead of me doing that, can I just tell it, hey, set up a person's directory entry for this person and it can just automatically go and tag all of those things?
+
+Unknown: Because I've fought with ChatGPT so much where I'm like, here is a link to someone's LinkedIn.
+
+Unknown: Do all of this for me.
+
+RYAN: It can't do that, but this will.
+
+Unknown: Okay, because it will be like, I can't access that LinkedIn.
+
+RYAN: But this can do this.
+
+Unknown: Okay, great.
+
+Unknown: This is what I built.
+
+Unknown: Yeah, cool. Cool. Yeah, so that's a big one that's like, that's super time consuming, and it's like a dummy could do it, but it takes time and it needs to be done, or else Dan's going to be frustrated.
+
+RYAN: I can do that.
+
+Unknown: I think so, because it's not just new people.
+
+Unknown: It's every time we meet with anyone, it needs to be updated.
+
+Unknown: Because the next time we meet with the person, maybe they have a new venture and you have to tag their new company.
+
+Unknown: And if they mention Sundance during the call, it should tag that they're interested in Sundance.
+
+Unknown: And it should keep the meeting notes in there so that the meeting notes are all in one place and easy to access as well.
+
+Unknown: So it's an ongoing thing that I do think deserves kind of its own category.
+
+Unknown: Okay, got it.
+
+RYAN: Perfect.That aligns exactly with what we talked about, how we're going to do it.
+
+Unknown: And Dan has been doing a lot of this.
+
+Unknown: He'll just go in Claude and draft emails and send them out.
+
+Unknown: My number one problem with that is he's been sending out emails from Claude that don't have hyperlinks on them, that need hyperlinks.
+
+Unknown: The formatting is shit.
+
+Unknown: Like, it's like a third of the width of the page, and so it just looks really bad.
+
+Unknown: Or it's someone who he has multiple emails saved for the person, like maybe three emails, and I know which one is the preferred one, and that's the one I'll email when I'm emailing from Dance, but the bot doesn't know what the preferred email is, and he'll email the wrong email, or he'll email the person and not CC their EA.
+
+Unknown: And we basically always need to CC their EA because they probably might not see it if we don't do that.
+
+Unknown: So we need if we could like train it to do that when it's drafting emails.
+
+Unknown: Got it.
+
+Unknown: And another big thing I used to do, which I feel like Dan won't really want me doing anymore, is like drafting responses in his email inbox to anyone and everyone.
+
+Unknown: And you should say that.
+
+Unknown: I know that right now, and it's easier for me to tell it what to do.
+
+Unknown: But if we could train it over time to read Dan's emails and learn what he typically says to things, and what is his stance on this area of politics, and what is his stance on other things, and like know what he would say, that would be really cool.
+
+Unknown: Love it.
+
+Unknown: Scheduling.I think my hesitation with using AI for scheduling so far has been like: if you use something like a calendly, calendly will only look at actual blank spots on a calendar.
+
+Unknown: When I schedule, I have to look at: is this a meeting with just Dan and Sabrina that I can book over?
+
+Unknown: And then if I offer that time, I can just move the meeting with Sabrina to another time.
+
+RYAN: Some can be moved.
+
+RYAN: And so if we had a system that could say that, oh, this meeting has this person, this person, it's an easily moved meeting, unless explicitly said it's not easily moved.
+
+Unknown: Yeah, yeah, totally.
+
+RYAN: Internal meetings have certain rankings based on who's in them. Yes.
+
+RYAN: And if they can be time-sensitive, then it is not able to be moved.
+
+RYAN: If it is not time-sensitive, then it can be moved and booked over as needed.
+
+Unknown: Because now we can't have two things overlapping on Dan's schedule.
+
+Unknown: So is it then able to look at Dan and Sabrina's calendar and move the Dan and Sabrina meeting after it sends out the invite for the external meeting?
+
+RYAN: Okay.Topic in-person-driven.
+
+RYAN: Cool.And then externals are not that way, though.
+
+Unknown: Yeah.I would say.
+
+Unknown: Got it.
+
+Unknown: Dan really needs a meeting to happen until I email the person and say, hey, sorry, something came up.
+
+RYAN: This is doable.
+
+RYAN: And which is what I do for my startup, anyways.
+
+Unknown: Awesome.So totally doable.
+
+RYAN: We can build a scheduling thing that looks at all that advantages and goes over in a, you know, your own EA. Cool. Okay, cool.
+
+RYAN: Keep going.
+
+Unknown: This is great.
+
+RYAN: Let's keep on fine.
+
+RYAN: Anything else about scheduling that's important?
+
+Unknown: Yeah, I would say anytime a meeting is booked that's in person where he needs to get there, it needs to figure out how long it takes to get there by using like Waze or Google Maps, looking at the specific time of day and date, how long is it going to take, and then use the more conservative estimate and save that time on the calendar before and after the meeting to make sure that he has time to get there and he's not rushing.
+
+Unknown: And then if it could like look up parking information of like where does he park when he gets to this external meeting and add the parking information into the travel time block too, that would be super helpful.
+
+RYAN: So I'm going to build the core and then I'll be like, these are the extras, and this is what we get, and that keeps me here an extra week.
+
+Unknown: Can it make dinner reservations?
+
+RYAN: If I said, okay, it can make dinner reservations in his voice.
+
+RYAN: So we can clone his voice and we can have him call the restaurant and book the dinner reservation in his own voice.
+
+Unknown: So, yes, we can do that.
+
+Unknown: I normally just use like open table, but that is wild.
+
+RYAN: Book dinners and reservations in his own voice.
+
+Unknown: Travel is another one.
+
+Unknown: So anytime we book travel, we typically do it through a web portal that has a login.
+
+RYAN: It could do that.
+
+RYAN: I mean, um. Okay.
+
+RYAN: I gotta move my car in 15 minutes.
+
+Unknown: Okay, great.
+
+RYAN: That's okay, I'm out.
+
+RYAN: Yo, guys, what's up?
+
+RYAN: Are you the OpenClaw version of you that you sent out to go get food?
+
+RYAN: Are you guys doing your trading website yet, your trading platform?
+
+Unknown: No, we actually.
+
+Unknown: I was gonna do Jarvis.
+
+Unknown: Are you a Top fan?
+
+Unknown: Is that why?
+
+Unknown: Wait, what did you say?
+
+Unknown: Jarvis.Jarvis.
+
+RYAN: Iron Man Squeezer.
+
+RYAN: Actually, not as much as you think.
+
+RYAN: Mine's Rel, Mayor.
+
+RYAN: Mine's Multi, which is like Malt Bot when I was like school, old school.
+
+RYAN: And then mine's Nightman.
+
+Unknown: That's my favorite.
+
+Unknown: Nightman is Nightman.
+
+Unknown: Yeah, Nightman, who covers the night shift and does all the night work.
+
+Unknown: Oh, that's cool.
+
+Unknown: What does it do over the night?
+
+RYAN: So the best part about Open Claw is that, one, tokens are cheaper at night.
+
+RYAN: And so you want it to, like, what you really want is like you want a team, like, when you think of a personal assistant, and I was going to talk about this, one of the most powerful uses of a PA is: imagine a PA who's in a different country of you and is awake when you're asleep, is looking at all these things, enriches LinkedIn, enriches the contact, looks at meeting notes, goes out and researches, finds out new things about people, pulls it in, then looks at your projects.
+
+RYAN: So while he's sleeping, it's like, oh, yesterday you were trying to do sponsorship for this music festival.
+
+RYAN: I went out and I researched a new approach for sponsorship.
+
+RYAN: And then it's like, oh, by the way, I looked at like better restaurants.
+
+RYAN: I know you like this style of food.
+
+RYAN: And there's a new place that opened up over there.
+
+RYAN: You might want to try it.
+
+Unknown: Yeah, that's cool.
+
+RYAN: And then, like, all these things that empowers you and everyone else.
+
+RYAN: So the best thing is to have a night shift run.
+
+RYAN: And most of the work that Bot does, I think.
+
+Unknown: Yeah, that's really cool, because I feel like everything I've mentioned to you so far is just things that we've done in the past, but you're actually thinking, like, how can we up-level this and get ahead of Dan and like think of ways to get you get ahead.
+
+RYAN: Getting ahead is the magic online.
+
+Unknown: That's really cool.
+
+Unknown: The coolest thing is, like, today, I have several projects, and it.
+
+RYAN: It's saying, here's your targets, here's what we want you to do.
+
+RYAN: Right.Just in general, like, you're this, you're one of the most advanced AIs in the world.
+
+Unknown: Here's our target.
+
+RYAN: Help us think about this.
+
+RYAN: And every single night, every 30 minutes, it triggers a new session where it thinks deeply about it, looks at what it made in the past, and then says, I can make that a little better.
+
+Unknown: Yeah, that's cool.
+
+RYAN: Yeah.And then you're ahead of danger.
+
+Unknown: Uh-huh.That's cool. Nice.
+
+Unknown: Yeah.That's awesome.
+
+RYAN: Great.That's part of what we want to do.
+
+RYAN: Yeah.And it's like log into a website and book.
+
+Unknown: Maybe they have enough.
+
+Unknown: But there's a little bit of nuance with it right now because you also have to track how many hours he has left on his contracts and balance: do we have enough hours to book this?
+
+Unknown: Are we going to run out of hours before his contract ends?
+
+Unknown: And we have a second company that we're using right now to supplement our hours.
+
+Unknown: So, like, we would just have to train it like if there's not enough Nets hours to
+
+Unknown: Than email James Lovett Fly1200 and try to book it that way.
+
+RYAN: That's honestly just a bunch of rules.
+
+Unknown: Yeah, and honestly, his travel is pretty simple.
+
+Unknown: So mostly the travel booking is just booking on flights.
+
+Unknown: Makes sense.
+
+Unknown: Yeah.Another thing I was thinking about, which the main reason I have to do this is human error, but like basically every morning I look at his calendar and I make sure if this is a virtual meeting, does it have a Google meet link?
+
+Unknown: If this is an in-person meeting, does it have everything it needs to have?
+
+Unknown: Does he have his travel time on his calendar?
+
+Unknown: So, but I feel that if we have a bot scheduling everything, the bot probably isn't making those mistakes and probably doesn't have to check that every morning.
+
+Unknown: But if it could still maybe run a check.
+
+RYAN: No, it should run a check because you don't want to say, oh, I don't want to create a calendar event because then it doesn't have everything and then it's more work for me.
+
+RYAN: Let's just make the bot check.
+
+RYAN: So if you're like, oh, I'm just going to throw something on the calendar, I know the bot will catch it and enrich it at night.
+
+Unknown: Yeah, that's true. Yeah.
+
+RYAN: And we just do a nightly enrichment.
+
+Unknown: Yeah.Nightmare.
+
+Unknown: Night or the dayman.
+
+RYAN: Yeah.Yeah, that's a so we do that event.
+
+RYAN: Wow.It's not the best.
+
+RYAN: What's he trying to do?
+
+Unknown: Unscrewing that.
+
+Unknown: Oh, like, oh, so removing a treasure.
+
+RYAN: Yeah.Okay, calendar event enrichment every night.
+
+RYAN: Cool.Um and then reports.
+
+RYAN: So one of the great things that this does is like reports.
+
+RYAN: There's uh nightly roundups and then there's like tasks task targets to-dos.
+
+RYAN: What is noise?
+
+RYAN: And what is not noise?
+
+Unknown: Yeah.I think that's a good question.
+
+Unknown: What sort of things does it send you?
+
+Unknown: What's in the report?
+
+RYAN: So let's say, hey, today was a great day.
+
+RYAN: We did all these things.
+
+RYAN: Today we were supposed to do X, Y, and X, Y, but those people never followed up.
+
+RYAN: We never did this.
+
+RYAN: Just know that this didn't happen.
+
+RYAN: Yeah.So, what I'm gonna do is, so, like, so we're still looking for that.
+
+RYAN: Here's a draft of an email to follow up.
+
+RYAN: What version of that should you see?
+
+Unknown: Should you approve it before Dan sees it?
+
+Unknown: I don't want, like, my goal is genuinely not to replace people.
+
+Unknown: Yeah, my goal is to empower people and make them even more useful.
+
+Unknown: So, you are doing 10x more, and all this other stuff is off your plate.
+
+Unknown: I agree
+
+Unknown: Because I feel like I frequently am finding mistakes when we were using chat versus when we were using Claude.
+
+Unknown: Why does it say that?
+
+RYAN: But again, we should be reviewing stuff and making sure.
+
+RYAN: And so that's why it's always for everything, it's going to be a human-in-the-middle process to start out with.
+
+Unknown: I think he should just see what he sees.
+
+Unknown: For Dan, the best process is like, let's make it as short and concise as possible to the need-to-know things.
+
+Unknown: Because, again, exactly what you said, what's noise and what's not, like, he gets so many asks all day from all different angles, and I think it's just a lot of information.
+
+Unknown: So, anything we can do, just like to the most short, straightforward, to the point, and action items of like, like you said, I caught this thing that you didn't do, we should do it.
+
+Unknown: Like, that should be in there so that he knows what needs to be done.
+
+Unknown: But if it's more just like, I don't know, I'm trying to, I can't even think of examples, but I would just say, in general, try to make it as concise as possible and really only like the need to know.
+
+RYAN: Is that something that you would also want to approve and look at?
+
+RYAN: Yeah, you don't need to be part of that, right?
+
+Unknown: No, I don't really overlap with the investments team that much.
+
+Unknown: So, as long as they're doing something that's like about a portfolio company, I don't need to.
+
+RYAN: So, I just want to make sure we don't pass it.
+
+Unknown: Yeah, I don't need to say that.
+
+Unknown: Do you mind walking back to the office or to that area?
+
+Unknown: Well, A, because it's really loud, and I'm not sure how much we're recording.
+
+Unknown: Oh, yeah, is that directly connected to your
+
+RYAN: It doesn't record anything, it just transcribes.
+
+RYAN: So it's legal everywhere in the world, and it's something that I talked to Joe about, and he said and Connor both said this would be something that we'd be willing to have in the office.
+
+RYAN: He just has this on him, just talks about what's happening, everything gets followed up.
+
+RYAN: There's no more, like, what did you say?
+
+Unknown: What do you need to put in?
+
+Unknown: Right, or something falls through the cracks.
+
+Unknown: Falls through the cracks.
+
+Unknown: Dan mentioned it very briefly while you were walking out the door.
+
+RYAN: Exactly, and so everybody gets one, everyone gets their meeting notes uploaded and synced, and then that system takes everything, updates again all of the bases that need to be taken care of.
+
+Unknown: Yeah, feels like a Black Mirror episode.
+
+RYAN: Yeah, feels like a Black Mirror episode.
+
+RYAN: And there's different ways we could do it.
+
+RYAN: I mean, I think Dan's firm is a special case because, as a private office, there's so much more that you're allowed to do than being SEC locked down for finance and stuff.
+
+RYAN: So, like, I was very careful about all that when I first got here, because I've been, I worked in VC, and I, and then everyone's like, no, man, we don't follow rules here.
+
+Unknown: We do whatever we want.
+
+RYAN: And I was like, really?
+
+RYAN: I was like, that's really nice.
+
+Unknown: We do whatever we want.
+
+Unknown: We do whatever Dan wants.
+
+RYAN: Yeah.I really liked that.
+
+RYAN: I was like, okay, cool. Yeah. Yeah.
+
+RYAN: And the way that I am is I kind of like measure twice, hit once.
+
+RYAN: So I took this whole week to like measure, talk to everybody.
+
+RYAN: And now I'm deploying, and then I'll do more talking and making sure everyone feels like it's what we need.
+
+RYAN: And then I got to talk to Dan tomorrow.
+
+RYAN: Did you have other questions for me?
+
+RYAN: Yeah, let's just sit up the top real quick.
+
+RYAN: I just want to make sure: is there any other wins?
+
+RYAN: Because you talk about personal.
+
+RYAN: I know that when you're.
+
+RYAN: There's a whole different world for personal stuff.
+
+RYAN: Does he have a let's like sit in the shade?
+
+RYAN: Hot.Um does he have like a a need for extra c extra calendars that are beyond work, that are like kids and family calendars and management that you also do?
+
+RYAN: Are there email connections that are like different?
+
+RYAN: Is there because right now we're talking all business.
+
+RYAN: Yeah.Is there a world where we're able to customize this to also handle large chunks that would free up and alleviate parts of his life so he'd feel better?
+
+RYAN: I mean, he moves fast.
+
+RYAN: He likes to juggle a lot of things.
+
+RYAN: But what makes sense in the future to fully take off his plate or automate that he would love?
+
+RYAN: Yeah.Like, I don't know, Dan, but I can assume.
+
+Unknown: I mean, his answer to that would just be like automate everything that you can possibly automate, I feel like.
+
+Unknown: But a lot of the other things I would say, as far as calendar-wise, is we do have like a home use program.
+
+Unknown: They have a house out near Beaver Creek, and they have the house in Cabo, and they let certain, like, family members and friends use the houses.
+
+Unknown: And it is, like, a little bit of, like, admin, of updating the calendars, making sure who's reserved it, who hasn't reserved, doing the communications of, like, hey, you have the house reserved for this date.
+
+Unknown: As a reminder, like, attached are the house rules, attached are the instructions on how to get in and the Wi-Fi and all that stuff.
+
+Unknown: That makes sense.
+
+Unknown: Just keeping those calendars up to date and, like, approving or denying the like requests for reservations and things like that.
+
+Unknown: So, that I think would be helpful.
+
+Unknown: I think another piece, personal-wise, is like golf tourn
+
+Unknown: At the golf tournament in Arrowhead or in Boulder or in Cabo.
+
+Unknown: And then once they're registered, add that to the calendars and figure out who his partner is, help him find a partner if he doesn't have a partner.
+
+Unknown: Those sorts of things.
+
+RYAN: Yeah, I mean, like, yeah, stretch goals like that.
+
+RYAN: Like, let's think of all the other things that might be helpful.
+
+Unknown: And then I think, as far as family-wise, there is this ongoing thing of trying to get the family more involved with the office.
+
+Unknown: So it's like, how do we get the family more involved?
+
+Unknown: And the team knowing the family, and the family knowing the team, and the family also like doing things with the Cruise Adventures team, whether it be like going to an event with the foundation or we meet up for like a happy hour or something.
+
+Unknown: I don't, this is all just like me vomiting.
+
+RYAN: Danny's in the office.
+
+Unknown: Like, I have once-a-week Zooms with her, and other people on the team have like ad hoc meetings with her as needed.
+
+Unknown: And then Dan comes into the office when he is in town, but he's been in Cabo a lot recently.
+
+Unknown: That's like just a random thing that I thought of that would be like a further along the line thing.
+
+RYAN: We'll give it to you.
+
+RYAN: It'll be documented.
+
+RYAN: You'll know it'll just be out there, which is what I also do. Yeah.
+
+Unknown: And then the two other pieces that we haven't touched on as much is the Caruso Foundation and the estate planning stuff.
+
+Unknown: Did you need to move your car?
+
+RYAN: So yeah, I'm lucky.
+
+RYAN: What?I'm very lucky.
+
+Unknown: So you're just.
+
+Unknown: Are you sure?
+
+Unknown: Yeah, I'll be able to.
+
+Unknown: I've had so many tickets out there.
+
+Unknown: I'm lucky.
+
+RYAN: It's just three hours.
+
+RYAN: Okay.Okay, I'll move in in a minute.
+
+RYAN: So I can move to like a different street, right?
+
+Unknown: I think so.
+
+RYAN: You just like this zone, and I just move it to another one.
+
+Unknown: I think so.
+
+Unknown: It's funny.
+
+Unknown: I'm not 100% sure, though.
+
+Unknown: They're ruthless out there.
+
+Unknown: Yeah, I know.
+
+Unknown: Well, it's okay.
+
+RYAN: Tell me the foundation and then tell me a state plan.
+
+Unknown: Okay, so the Caruso Foundation is like the piece of Carusa Ventures that always gets pushed to the back burner because everyone's working on everything else.
+
+Unknown: But there's a lot of just organizational things we need to do there to professionalize it, is the word we keep using of like what sorts of documents do we need to have filed away that we might not have.
+
+Unknown: Is that a non-profit?
+
+Unknown: It's a yes, but it's yeah, it's foundation where we give grant money to nonprofits.
+
+Unknown: Okay, cool.
+
+Unknown: So it's like, and if we could have a system that more easily tracks all of our grant-making process, so like if a request comes in, or if it's not a request, if it's like the team proposing it, you know, when was the proposal made?
+
+Unknown: When did we discuss it with Dan and Cindy?
+
+Unknown: Cool.Were any other follow-ups made?
+
+Unknown: All of that tracking process is completely manual, mostly by me.
+
+Unknown: That I think could be easily automated.
+
+RYAN: Yeah, decks are easy.
+
+Unknown: I'm Connor probably brought that up with you, but like we make quarterly board decks for the next Gen board meeting, which is on the estate side, but we also make quarterly board decks for the Cursive Foundation, just summarizing all the investment activity throughout the quarter, any event community things that we did.
+
+Unknown: It basically summarizes everything that we do, but it's a narrative format, and I feel like it could do that.
+
+Unknown: And then the estate planning stuff, I don't do as much with that.
+
+Unknown: Honestly, Kylie, who just I think you met her, but she left last week, did a lot of that.
+
+Unknown: So there's definitely things it can do there, but I just don't know what those things are.
+
+RYAN: I'll see that for last.
+
+RYAN: I got the time.
+
+RYAN: You can tell Dan that I have met with you. Okay.
+
+RYAN: That we talked, that we took notes, and we're set up.
+
+Unknown: Sounds good.
+
+RYAN: Yeah.I might be working late beside you guys just to make sure that everything's up and done.
+
+RYAN: And I kind of want to front load all the work this week. Yeah.
+
+Unknown: All right.
+
+Unknown: That's good.
+
+Unknown: Thank you.
+
+Unknown: Yeah, no, thank you.
+
+Unknown: It's really good to know you better too.
+
+RYAN: Yeah, absolutely.
+
+Unknown: It's good to know you too.
+
+RYAN: I really hope this helps everyone here.
+
+RYAN: I know, I think it will.
+
+RYAN: That's my big thing.
+
+RYAN: I just want everyone to have more time.
+
+Unknown: It's going to completely change the way we do everything.
+
+Unknown: Especially if you're eyeballing off.
+
+Unknown: Yeah, yeah.
+
+RYAN: Well, I'm going to move the car and I'll leave back.
+
+Unknown: Hopefully.Cool.
+
+Unknown: Car moving time.
+
+Unknown: Guys, again, I'll be back.
+
+RYAN: Moving my car, I'll be back.
+
+RYAN: And I thought that I'd just give you a quick mark.
+
+RYAN: It looks like I'm a. ..
+
+RYAN: They want me to do a They have like a big team meeting tonight, so I won't be able to work with the vice president on the stuff tonight, and he wants to do it tomorrow.
+
+RYAN: And I was like, well, okay, I'm already doing it tomorrow.
+
+RYAN: So I'm gonna um Belize, I guess, to that.
+
+RYAN: That means that I will be here for dinner tomorrow.
+
+RYAN: And I just figured since I was already planning on being here tonight late, I'm just gonna do extra time here and just do a bunch of work.
+
+RYAN: Like, I'll just, if they're if they're gonna stay late here in the office and just keep doing work, like, I'll just do the same and just keep doing work.
+
+RYAN: And then I'll be almost done with my hours earlier in the week, and that'd be great.
+
+RYAN: I love you.
+
+RYAN: I'll see you later tonight.
+
+Unknown: I think.
+
+RYAN: Like an actual hour-long session, or I don't focus on anyone else but you and try to help you fix this problem.
+
+RYAN: I'm sure what it is, like exactly, or what's happening, but there's some like maybe it's a full reinstall, maybe it's an update of some of the packages or stuff like that.
+
+RYAN: I can't tell how long it's going to take, and I kind of want to get your system working again fully since you've enjoyed it so much, and there's more that I can give.
+
+RYAN: But, like, I think that'd be like a dedicated hour, and if we did that, it'd be at my rate.
+
+RYAN: I could try for free at Open Claw, but if there are a lot of people there, I'm just not going to be able to get to you with the level of detail just because I need to look at your system and I'm setting up so many other people.
+
+RYAN: So if you're down, you know, I think just an hour might be good, and we could schedule that on Thursday or Friday.
