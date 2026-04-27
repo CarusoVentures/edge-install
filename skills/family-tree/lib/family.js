@@ -205,6 +205,56 @@ export function relationship({ person_a, person_b }) {
   return { ok: true, a, b, degree: pathIds.length - 1, path: pathEnriched };
 }
 
+// -------------------- ORIGINS (ancestral places) --------------------
+
+export function origins({ min_count = 1, max_closeness = null }) {
+  const db = getDb();
+  let where = "WHERE birth_place IS NOT NULL AND birth_place != ''";
+  const params = [];
+  if (max_closeness !== null && max_closeness !== undefined) {
+    where += ' AND family_closeness IS NOT NULL AND family_closeness <= ?';
+    params.push(max_closeness);
+  }
+  const rows = db.prepare(`
+    SELECT birth_place, COUNT(*) AS count,
+           MIN(birth_year) AS earliest_year,
+           MAX(birth_year) AS latest_year
+    FROM family_members
+    ${where}
+    GROUP BY birth_place
+    HAVING COUNT(*) >= ?
+    ORDER BY count DESC
+  `).all(...params, min_count);
+
+  // Group by country/region heuristically
+  const byCountry = new Map();
+  for (const r of rows) {
+    const place = r.birth_place;
+    let country = 'Unknown';
+    if (/\b(italy|italia)\b/i.test(place)) country = 'Italy';
+    else if (/\busa\b|\bunited states\b|, [A-Z]{2}\b|illinois|ohio|colorado|new hampshire|new york|california|massachusetts|pennsylvania|texas|florida|virginia/i.test(place)) country = 'USA';
+    else if (/\bcanada\b/i.test(place)) country = 'Canada';
+    else if (/\bgermany\b|\bdeutschland\b/i.test(place)) country = 'Germany';
+    else if (/\bireland\b/i.test(place)) country = 'Ireland';
+    else if (/\bengland\b|\bbritain\b|\buk\b/i.test(place)) country = 'England/UK';
+    if (!byCountry.has(country)) byCountry.set(country, { count: 0, earliest: 9999, places: [] });
+    const c = byCountry.get(country);
+    c.count += r.count;
+    if (r.earliest_year && r.earliest_year < c.earliest) c.earliest = r.earliest_year;
+    c.places.push({ place, count: r.count });
+  }
+
+  return {
+    by_country: [...byCountry.entries()].map(([country, info]) => ({
+      country,
+      total_individuals: info.count,
+      earliest_year: info.earliest === 9999 ? null : info.earliest,
+      top_places: info.places.slice(0, 5),
+    })).sort((a, b) => b.total_individuals - a.total_individuals),
+    raw_places: rows,
+  };
+}
+
 // -------------------- FACTS.ADD --------------------
 
 export function factsAdd({ gedcom_id, fact_type, fact_text, fact_subtype, source = 'explicit', source_ref, owner_agent, confirmed = false }) {

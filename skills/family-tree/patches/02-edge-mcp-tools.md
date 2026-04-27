@@ -138,6 +138,21 @@ function scopeToFamily(fn) {
 );
 
   server.registerTool(
+  'edge.family.origins',
+  {
+    title: 'Ancestral places of origin (aggregated)',
+    description:
+      'Aggregates birth_place values across the family tree to answer "where are we from" / "what is my ancestry / heritage" questions. Returns counts grouped by inferred country plus raw place strings. ALWAYS use this for ancestry-origin questions — do not guess from the surname (Caruso is from Abruzzo, NOT Sicily, despite common assumptions). Optional max_closeness filter (e.g., 5 to focus on direct line). Scoped — pass as_agent.',
+    inputSchema: {
+      min_count: z.number().int().positive().optional(),
+      max_closeness: z.number().int().positive().max(20).optional(),
+      as_agent: z.string().min(1),
+    },
+  },
+  scopeToFamily(async (input) => wrap('family.origins', async () => ok(family.origins(input))))
+);
+
+  server.registerTool(
   'edge.family.capture_from_message',
   {
     title: 'Scan a Dan-message for family-fact captures',
