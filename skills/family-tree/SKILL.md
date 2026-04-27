@@ -44,7 +44,7 @@ Use this skill whenever Dan asks about his family. The 1,114-person tree was loa
 - "Who is my great-grandfather Rosario?" / "Who is Aunt Mary?" → `edge.family.lookup` then `edge.family.get`
 - "Whose birthday is coming up?" → `edge.family.upcoming_dates`. **If empty for `days=30`, ALWAYS retry with `days=90`** and report the next upcoming as "in N days". Don't tell Dan "no birthdays" without checking the wider window.
 - "How am I related to Joe Caruso?" / "Who connects me to Federico Balzano?" → `edge.family.relationship`
-- "Show me what I know about my grandfather" → `edge.family.get`
+- "Show me what I know about my grandfather" / "Tell me about Rosario" → `edge.family.get`. Returns a **research** field with a multi-paragraph story, era/place context, and open_questions. Use these directly when explaining a person — they're already grounded in the family data.
 - **"Where are we from?" / "What's my ancestry?" / "What are my origins?" / "Are we Italian?" → `edge.family.origins` (NOT a guess from the surname).** Caruso is from Abruzzo (specifically Castel di Sangro), NOT Sicily — common assumption is wrong. Always check the data.
 - "Remember that Aunt Mary moved to Denver" / "Uncle Joe loves single-malt" → `edge.family.facts.add` (or capture_from_message)
 - "I gave Mom a cashmere throw last Christmas" → `edge.family.gift.log`
@@ -61,7 +61,7 @@ Use this skill whenever Dan asks about his family. The 1,114-person tree was loa
 | Tool | Use when |
 |---|---|
 | `edge.family.lookup(query, limit?, as_agent)` | Fuzzy name search → list of candidates with closeness + relation |
-| `edge.family.get(gedcom_id OR name, as_agent)` | Full dossier — vitals, parents/spouse/children/siblings, captured facts, photos |
+| `edge.family.get(gedcom_id OR name, as_agent)` | Full dossier — vitals, parents/spouse/children/siblings, captured facts, photos, **research** (story / era_context / place_context / open_questions / links / confidence — pre-computed for closeness ≤ 3 ancestors) |
 | `edge.family.upcoming_dates(days?, max_closeness?, as_agent)` | Birthdays in next N days, closeness-gated. Default days=30, max_closeness=3. **If empty, retry with days=90 before reporting "no birthdays".** |
 | `edge.family.relationship(person_a, person_b, as_agent)` | Shortest path between two relatives |
 | `edge.family.origins(min_count?, max_closeness?, as_agent)` | Ancestral place aggregation — answers "where are we from" / ancestry origin questions. Returns by_country breakdown + raw places. |

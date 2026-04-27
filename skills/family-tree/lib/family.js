@@ -102,6 +102,23 @@ export function get({ gedcom_id, name }) {
 
   row.crm_link = db.prepare(`SELECT * FROM crm_link WHERE family_member_id = ?`).get(row.id) || null;
 
+  // Research output (latest model wins if multiple rows)
+  const research = db.prepare(`
+    SELECT story, era_context, place_context, open_questions, links, confidence,
+           model, generated_at
+    FROM family_research
+    WHERE family_member_id = ?
+    ORDER BY generated_at DESC
+    LIMIT 1
+  `).get(row.id);
+  if (research) {
+    try { research.open_questions = JSON.parse(research.open_questions || '[]'); } catch { research.open_questions = []; }
+    try { research.links = JSON.parse(research.links || '[]'); } catch { research.links = []; }
+    row.research = research;
+  } else {
+    row.research = null;
+  }
+
   return row;
 }
 

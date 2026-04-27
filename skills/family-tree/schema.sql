@@ -116,3 +116,37 @@ FOR EACH ROW
 BEGIN
   UPDATE family_members SET updated_at = datetime('now') WHERE id = NEW.id;
 END;
+
+-- ----------------------------------------------------------------------------
+-- family_research: structured research output per person.
+-- One row per (family_member, model_version) — re-running with a new model
+-- creates a new row rather than overwriting.
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS family_research (
+  id                INTEGER PRIMARY KEY AUTOINCREMENT,
+  family_member_id  INTEGER NOT NULL REFERENCES family_members(id) ON DELETE CASCADE,
+  model             TEXT NOT NULL,                   -- e.g. 'anthropic/claude-sonnet-4.6'
+  story             TEXT,                            -- 2-3 paragraph narrative grounded in data
+  era_context       TEXT,                            -- 1 paragraph about the time period
+  place_context     TEXT,                            -- 1 paragraph about the location
+  open_questions    TEXT,                            -- JSON array of gaps Dan can fill
+  links             TEXT,                            -- JSON array of {url, title, kind} (Wikipedia etc.)
+  confidence        REAL,                            -- 0..1 self-rated by the model
+  generated_at      INTEGER NOT NULL,                -- unix epoch seconds
+  prompt_tokens     INTEGER,
+  completion_tokens INTEGER
+);
+CREATE INDEX IF NOT EXISTS idx_fr_person ON family_research(family_member_id);
+CREATE INDEX IF NOT EXISTS idx_fr_model  ON family_research(model);
+
+-- place_research: cache of per-place context, shared across all people from that place.
+-- Avoids duplicating "Castel di Sangro 1880s" research 64 times.
+CREATE TABLE IF NOT EXISTS place_research (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  place         TEXT UNIQUE NOT NULL,                -- normalized place string
+  era_window    TEXT,                                -- e.g. "1850-1920" — when relatives were there
+  context       TEXT,                                -- LLM-generated place + era context
+  model         TEXT,
+  generated_at  INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_pr_place ON place_research(place);
