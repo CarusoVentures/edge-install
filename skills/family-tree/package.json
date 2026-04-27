@@ -1,0 +1,11 @@
+{
+  "name": "edge-family",
+  "version": "0.1.0",
+  "description": "Family module for Edge — GEDCOM ingest, family.db access, growth loop.",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "better-sqlite3": "^12.4.1"
+  }
+}
