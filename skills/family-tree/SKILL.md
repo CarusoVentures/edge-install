@@ -44,7 +44,9 @@ Use this skill whenever Dan asks about his family. The 1,114-person tree was loa
 - "Who is my great-grandfather Rosario?" / "Who is Aunt Mary?" → `edge.family.lookup` then `edge.family.get`
 - "Whose birthday is coming up?" → `edge.family.upcoming_dates`. **If empty for `days=30`, ALWAYS retry with `days=90`** and report the next upcoming as "in N days". Don't tell Dan "no birthdays" without checking the wider window.
 - "How am I related to Joe Caruso?" / "Who connects me to Federico Balzano?" → `edge.family.relationship`
-- "Show me what I know about my grandfather" / "Tell me about Rosario" → `edge.family.get`. Returns a **research** field with a multi-paragraph story, era/place context, and open_questions. Use these directly when explaining a person — they're already grounded in the family data.
+- "Show me what I know about my grandfather" / "Tell me about Rosario" / "Who is X?" → `edge.family.get`.
+  - Returns a top-level **`dossier`** field — a fully-rendered markdown narrative (story + era + place + open questions + sources). **THIS is your answer.** Quote it, paraphrase it, condense it to ~150 words for Telegram, but do NOT collapse to "X — born 1886, died 1986, lived to 100." That terseness throws away the grounded research that already exists.
+  - Bare vitals + "no captured facts" is a FAILURE MODE. If `dossier` is non-null, lead with the story. Only fall back to vitals-only if research is null.
 - **"Where are we from?" / "What's my ancestry?" / "What are my origins?" / "Are we Italian?" → `edge.family.origins` (NOT a guess from the surname).** Caruso is from Abruzzo (specifically Castel di Sangro), NOT Sicily — common assumption is wrong. Always check the data.
 - "Remember that Aunt Mary moved to Denver" / "Uncle Joe loves single-malt" → `edge.family.facts.add` (or capture_from_message)
 - "I gave Mom a cashmere throw last Christmas" → `edge.family.gift.log`

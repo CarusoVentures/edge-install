@@ -115,8 +115,43 @@ export function get({ gedcom_id, name }) {
     try { research.open_questions = JSON.parse(research.open_questions || '[]'); } catch { research.open_questions = []; }
     try { research.links = JSON.parse(research.links || '[]'); } catch { research.links = []; }
     row.research = research;
+
+    // Build a top-level rendered dossier so the model uses it directly rather
+    // than collapsing to bare vitals. This is the SOURCE OF TRUTH for "who is X"
+    // / "tell me about X" answers — agents should quote or paraphrase liberally.
+    const parts = [];
+    parts.push(`# ${row.display_name}${row.family_relation ? ' — ' + row.family_relation + ' (degree ' + row.family_closeness + ')' : ''}`);
+    parts.push('');
+    parts.push(research.story || '');
+    if (research.era_context) {
+      parts.push('');
+      parts.push('**Era:** ' + research.era_context);
+    }
+    if (research.place_context) {
+      parts.push('');
+      parts.push('**Place:** ' + research.place_context);
+    }
+    if (research.open_questions && research.open_questions.length) {
+      parts.push('');
+      parts.push('**Open questions for Dan:**');
+      for (const q of research.open_questions) parts.push('- ' + q);
+    }
+    if (research.links && research.links.length) {
+      parts.push('');
+      parts.push('**Sources:**');
+      for (const l of research.links) {
+        const t = l.title || l.url;
+        parts.push(`- [${t}](${l.url})`);
+      }
+    }
+    row.dossier = parts.join('\n');
+    row.dossier_instruction =
+      'IMPORTANT: This dossier field is the answer for "who is X" / "tell me about X" questions. ' +
+      'Use it generously — quote, paraphrase, or summarize down to ~150 words for Telegram. ' +
+      'DO NOT collapse to bare birth/death years and a one-line summary; that loses the grounded research that was generated for this person.';
   } else {
     row.research = null;
+    row.dossier = null;
   }
 
   return row;
