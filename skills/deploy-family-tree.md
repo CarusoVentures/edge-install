@@ -9,7 +9,7 @@
 
 ## Purpose
 
-Turn Dan's Ancestry.com GEDCOM (1,114 individuals) into Edge's executive-assistant-grade family knowledge — birthdays surface in briefings, dossiers carry family context, agents answer "who is my great-grandfather Rosario?" instantly. Privacy is structural: family data physically never enters the business CRM or Notion.
+Turn Dan's Ancestry.com GEDCOM (1,114 individuals) into Edge's executive-assistant-grade family knowledge that responds when Dan asks. Dossiers carry family context, agents answer "who is my great-grandfather Rosario?" instantly. **Family is reactive-only by design** — never auto-pushed into briefings or any proactive surface. Privacy is structural: family data physically never enters the business CRM or Notion.
 
 **Vision (paraphrased Ryan):** "This is a life-improvement tool. As Dan adds gift preferences, life events, residence updates, Edge grows the knowledge base. It can help book trips because it knows who's close, ages, locations. There's a lot of extra information that gets added to help Edge manage Dan's family connections."
 
@@ -19,7 +19,7 @@ Turn Dan's Ancestry.com GEDCOM (1,114 individuals) into Edge's executive-assista
 - ✅ Capture facts Dan mentions ("Uncle Joe loves single-malt") — queued for Dan-confirmed addition
 - ❌ **No** behavioral monitoring (silence-nudges, contact-cadence). Opt-in only on explicit Dan request.
 - ❌ **No** Notion sync (structural — guard refuses)
-- ❌ **No** auto-messaging Dan yet (briefing/nightshift remain disabled until Dan authorizes)
+- ❌ **Family content NEVER appears in Dan's morning briefing or any proactive channel** — by design, locked policy 2026-04-28. Even if there's a milestone birthday or fresh research, it stays in the database until Dan asks.
 
 ## Architecture
 
@@ -51,20 +51,22 @@ Turn Dan's Ancestry.com GEDCOM (1,114 individuals) into Edge's executive-assista
                                         │
               ┌─────────────────────────┼─────────────────────────┐
               ▼                         ▼                         ▼
-      mcp/lib/family.js        dossier-builder.js        nightshift phase 9
-      (7 MCP tools)            (5th source)              (research + upcoming)
+      mcp/lib/family.js        dossier-builder.js        research_batch.js
+      (8 MCP tools)            (5th source)              (one-shot bulk)
               │                         │                         │
               │                         │                         ▼
-              │                         │              edge-cache.db keys:
-              │                         │              family:upcoming-dates
-              │                         │              family:did-you-know:*
-              │                         │                         │
-              ▼                         ▼                         ▼
-        Max gateway               Briefing dossiers      daily-briefing.js
-        (SSH tunnel)              for known Carusos      Family & Dates section
-              │                                                   │
-              ▼                                                   ▼
-        Dan/Ryan agents                                    Telegram briefing
+              │                         │              family.db tables:
+              │                         │              family_research
+              │                         │              place_research
+              ▼                         ▼
+        Max gateway               Briefing dossiers (only for CRM-linked
+        (SSH tunnel)              business contacts who are also family)
+              │
+              ▼
+        Dan/Ryan agents (REACTIVE — answer when asked)
+              │
+              ▼
+   No proactive surface for family content. Ever.
 
   PRIVACY GUARD (single chokepoint covering all paths):
   ┌──────────────────────────────────────────────────────────┐
@@ -170,8 +172,8 @@ Apply each patch in order (each contains exact diff instructions):
 1. `family-tree/patches/01-lib-notion-guard.md` — adds privacy guard to `lib/notion.js::createPage`
 2. `family-tree/patches/02-edge-mcp-tools.md` — registers 7 `edge.family.*` tools + `scopeToFamily` wrapper + `EDGE_FAMILY_AGENTS` plist env
 3. `family-tree/patches/03-dossier-builder.md` — `getFamilyProfile` 5th source + `:FAMILY_*` edge filter
-4. `family-tree/patches/04-nightshift-phase9.md` — `phase9_familyResearch` (dormant — LaunchAgent disabled)
-5. `family-tree/patches/05-daily-briefing.md` — `buildFamilyBlock` + conditional Family & Dates section (dormant — LaunchAgent disabled)
+~~4. `family-tree/patches/04-nightshift-phase9.md`~~ — REMOVED. Family content is reactive-only; no nightshift integration.
+~~5. `family-tree/patches/05-daily-briefing.md`~~ — REMOVED. Family content never appears in the briefing.
 
 ### Step 7 — Skill registration
 
@@ -289,17 +291,11 @@ launchctl load   ~/Library/LaunchAgents/com.edge.mcp-server.plist
 
 Danny's agents now see and can call `edge.family.*` tools. Their writes (`facts.add`, `gift.log`) attribute as `owner_agent='danny-primary'`. Their confirmation queue is separate from Dan's.
 
-### Activate proactive briefings (Dan opt-in)
+### Family in proactive briefings — locked OFF
 
-When Dan authorizes:
-```bash
-mv ~/Library/LaunchAgents/_disabled/com.edge.nightman.plist        ~/Library/LaunchAgents/
-mv ~/Library/LaunchAgents/_disabled/com.edge.daily-briefing.plist  ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.edge.nightman.plist
-launchctl load ~/Library/LaunchAgents/com.edge.daily-briefing.plist
-```
+Family content is **never** included in the morning briefing or any proactive Edge surface, by design (policy locked 2026-04-28). The briefing/nightshift LaunchAgents may be enabled or disabled for OTHER reasons (e.g. business briefings) but those services contain no family code paths. If you find yourself adding a `buildFamilyBlock` or a `phase9_family*` function, stop — re-read this file.
 
-Until then, the phase 9 + Family & Dates code is dormant. Reactive queries via MCP work fine.
+Reactive queries via the `edge.family.*` MCP tools work fine regardless.
 
 ### Wire trigger-phrase auto-scan into Dan's chat receive (optional)
 
@@ -321,7 +317,7 @@ rm -rf ~/.openclaw/workspace/family/
 
 # Revert in-place patches (if using git)
 cd ~/.openclaw/workspace
-git checkout mcp/lib/notion.js mcp/edge-mcp.js lib/dossier-builder.js scripts/nightshift.js scripts/daily-briefing.js
+git checkout mcp/lib/notion.js mcp/edge-mcp.js lib/dossier-builder.js
 
 # Remove launchd env var manually from com.edge.mcp-server.plist + reload
 ```
@@ -336,7 +332,7 @@ git checkout mcp/lib/notion.js mcp/edge-mcp.js lib/dossier-builder.js scripts/ni
 ## Test posture (current)
 
 - **Through Ryan first.** `EDGE_FAMILY_AGENTS` includes `ryan-primary,ryan-testing`. All initial automation testing routes to Ryan's DM.
-- **Dan stays reactive.** Dan can ask Edge family questions and get answers. He does NOT receive proactive briefings yet.
+- **Dan stays reactive — permanently.** Dan can ask Edge family questions and get answers. He does NOT receive proactive briefings about family. Ever. This is policy, not a phase-1 limitation.
 - **No silence-nudging.** Behavioral monitoring features are opt-in only (per `feedback_no_surveillance_defaults.md` rule).
 
 ## Files in this deployment package
@@ -358,15 +354,14 @@ family-tree/
     ├── 01-lib-notion-guard.md           # patches mcp/lib/notion.js
     ├── 02-edge-mcp-tools.md             # patches mcp/edge-mcp.js + plist
     ├── 03-dossier-builder.md            # patches lib/dossier-builder.js
-    ├── 04-nightshift-phase9.md          # patches scripts/nightshift.js
-    └── 05-daily-briefing.md             # patches scripts/daily-briefing.js
+    └── 06-research-batch.md             # describes one-shot bulk research enrichment
 ```
 
 ## Future work (out of v1 scope)
 
 - **Photo rendering in Telegram** — `edge.family.get` returns `media_paths`. Wire `sendPhoto(absolute_path)` to Telegram for "show me a photo of great-grandma" flows.
 - **Neo4j subgraph** — when edge-neo4j docker container is provisioned, re-run ingester with `--neo4j` (currently a stub; needs real Cypher write code).
-- **Trip planning** — `family_members.residence_*` columns are present but unpopulated. Capture via trigger-phrase ("Aunt Jane moved to Denver") + briefing confirmation.
+- **Trip planning** — `family_members.residence_*` columns are present but unpopulated. Capture via trigger-phrase ("Aunt Jane moved to Denver") + reactive confirmation when Dan next asks about that person.
 - **Gift idea generator** — read `family_facts` (preferences) + `family_gifts` (ledger) + occasion + budget, LLM composes 3 ideas. Trivial to add as `edge.family.gift.suggest`.
 - **Health tracking** — separate sensitive table (`family_health`) for closeness-1 only. Not in v1.
 - **Correspondence drafting** — holiday cards / condolences grounded in captured facts.

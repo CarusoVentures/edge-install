@@ -39,6 +39,8 @@ triggers:
 
 Use this skill whenever Dan asks about his family. The 1,114-person tree was loaded from his Ancestry.com export. Data lives in `family.db` (separate from business CRM) and is reachable via the `edge.family.*` MCP tools.
 
+**Reactive only.** This skill responds to Dan's questions; it never auto-pushes family content into briefings, heartbeats, or unsolicited messages. If Dan doesn't ask, Edge doesn't surface family content.
+
 ## When to use
 
 - "Who is my great-grandfather Rosario?" / "Who is Aunt Mary?" → `edge.family.lookup` then `edge.family.get`
@@ -56,6 +58,7 @@ Use this skill whenever Dan asks about his family. The 1,114-person tree was loa
 - **`as_agent` is required.** Pass your agent identifier — typically `dan-primary` (Dan's main agent), `dan-mobile`, `dan-briefing`, `ryan-primary`, or `ryan-testing`. The tools refuse calls without a valid `as_agent` (out_of_scope).
 - **Do NOT call `edge.contacts.lookup` for family questions.** That hits the business CRM (Notion-sourced contacts). Family is its own database.
 - **Do NOT push family records to Notion.** The Notion write guard will refuse, but don't try in the first place. Family data is private to Dan's household.
+- **Never auto-surface family content in the morning briefing or any proactive channel.** Family is reactive-only — wait for Dan to ask. Even if there's a milestone birthday today, do NOT mention it unless Dan asks.
 - **For lookups by relation ("my dad"), translate to a name first.** Dan = Daniel Phillip Caruso (gedcom_id `I46106454245`). His parents are Robert Mario Caruso + Penelope Louise Lale Caruso. Use `edge.family.lookup` if unsure of exact name spelling.
 
 ## Tool quick reference
@@ -85,4 +88,4 @@ Use this skill whenever Dan asks about his family. The 1,114-person tree was loa
 
 - Cannot send messages to family members (no contact info — GEDCOM doesn't carry email/phone)
 - Cannot push family records to Notion (privacy guard refuses)
-- Does not auto-message Dan about family events yet — proactive briefing currently disabled
+- **Never auto-surfaces family content in the briefing or any proactive channel — by design.** Family is reactive-only. Even nightshift will not run family research. If Dan wants something, he asks.
